@@ -1,6 +1,12 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
+import PostCard from '../../molecules/PostCard';
+import AboutUserBox from '../../molecules/AboutUserBox';
+import ContentBox from '../ContentBox';
+import EventCard from '../../molecules/EventCard';
+import { tabContentsProps } from './types';
 
-const TabsContents = () => {
+const TabsContents = ({ latestPosts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage }: tabContentsProps) => {
+  console.log(latestPosts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage);
   return (
     <Box borderTopWidth={1} borderTopColor="gray.200">
       <Tabs isFitted>
@@ -37,17 +43,25 @@ const TabsContents = () => {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel bg="white" rounded={10} >
-            <Text>Post!</Text>
+          <TabPanel p="0">
+            <ContentBox sideBar={<AboutUserBox />}>
+              <PostCard />
+            </ContentBox>
           </TabPanel>
-          <TabPanel bg="white" rounded={10} >
-            <Text>Event!</Text>
+          <TabPanel p="0">
+            <ContentBox sideBar={<AboutUserBox />}>
+              <EventCard />
+            </ContentBox>
           </TabPanel>
-          <TabPanel bg="white" rounded={10} >
-            <Text>Replies!</Text>
+          <TabPanel p="0">
+            <ContentBox>
+              <Text>Replies</Text>
+            </ContentBox>
           </TabPanel>
-          <TabPanel bg="white" rounded={10} >
-            <Text>Spaces!</Text>
+          <TabPanel p="0">
+            <ContentBox>
+              <Text>Spaces</Text>
+            </ContentBox>
           </TabPanel>
         </TabPanels>
       </Tabs>
