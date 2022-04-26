@@ -21,7 +21,7 @@ import { BsChevronRight, BsThreeDots } from 'react-icons/bs';
 
 const PostCard = () => {
   return (
-    <VStack w="full" bg="white" rounded={10}>
+    <VStack w="full" bg="white" rounded={10} mb="5">
       <HStack p={4} w="full" justifyContent="space-between">
         <HStack>
           <Box w={16} h={16} boxShadow="lg" rounded="full">

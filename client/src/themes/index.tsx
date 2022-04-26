@@ -21,7 +21,7 @@ const global = {
         bg: 'yellow.100',
         color: 'black',
         fontSize: 16,
-        m: 0,
+        overflowX: 'hidden',
       },
     },
   },
@@ -34,7 +34,7 @@ const custom = {
       200: '#eee8d5',
     },
     gray: {
-      50: "#f4f1ea",
+      50: '#f4f1ea',
       100: '#f2ebd8',
       600: '#5a7575',
     },

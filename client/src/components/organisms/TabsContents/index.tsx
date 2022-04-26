@@ -4,9 +4,11 @@ import AboutUserBox from '../../molecules/AboutUserBox';
 import ContentBox from '../ContentBox';
 import EventCard from '../../molecules/EventCard';
 import { tabContentsProps } from './types';
+import InfiniteScroll from 'react-infinite-scroller';
 
-const TabsContents = ({ latestPosts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage }: tabContentsProps) => {
-  console.log(latestPosts, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage);
+const TabsContents = (props: tabContentsProps) => {
+  const { latestPosts, isLoading, fetchNextPage, isFetchingNextPage, tagline, email, createdAt, fields } = props;
+  console.log(latestPosts);
   return (
     <Box borderTopWidth={1} borderTopColor="gray.200">
       <Tabs isFitted>
@@ -44,23 +46,58 @@ const TabsContents = ({ latestPosts, isLoading, fetchNextPage, hasNextPage, isFe
         </TabList>
         <TabPanels>
           <TabPanel p="0">
-            <ContentBox sideBar={<AboutUserBox />}>
-              <PostCard />
+            <ContentBox sideBar={<AboutUserBox isLoading={isLoading} tagline={tagline} since={createdAt} email={email} fields={fields} />}>
+              {isLoading ? (
+                <Text textAlign="center">Loading...</Text>
+              ) : (
+                <InfiniteScroll
+                  pageStart={0}
+                  hasMore={true || false}
+                  loadMore={() => fetchNextPage()}
+                  loader={
+                    <Text color="gray.400" key={0}>
+                      {isFetchingNextPage && `Loading...`}
+                    </Text>
+                  }
+                >
+                  {latestPosts.map((post, index) => (
+                    <PostCard key={post.id} />
+                  ))}
+                </InfiniteScroll>
+              )}
+              {/* <PostCard /> */}
             </ContentBox>
           </TabPanel>
           <TabPanel p="0">
-            <ContentBox sideBar={<AboutUserBox />}>
-              <EventCard />
+            <ContentBox sideBar={<AboutUserBox isLoading={isLoading} tagline={tagline} since={createdAt} email={email} fields={fields} />}>
+              {isLoading ? (
+                <Text textAlign="center">Loading...</Text>
+              ) : (
+                <InfiniteScroll
+                  pageStart={0}
+                  hasMore={true || false}
+                  loadMore={() => fetchNextPage()}
+                  loader={
+                    <Text color="gray.400" key={0}>
+                      {isFetchingNextPage && `Loading...`}
+                    </Text>
+                  }
+                >
+                  {latestPosts.map((post, index) => (
+                    <PostCard key={post.id} />
+                  ))}
+                </InfiniteScroll>
+              )}
             </ContentBox>
           </TabPanel>
           <TabPanel p="0">
             <ContentBox>
-              <Text>Replies</Text>
+              <Text textAlign="center" bg="white" boxShadow="md" rounded={10} p="10">There is no Replies</Text>
             </ContentBox>
           </TabPanel>
           <TabPanel p="0">
             <ContentBox>
-              <Text>Spaces</Text>
+              <Text textAlign="center" bg="white" boxShadow="md" rounded={10} p="10">There is no Spaces</Text>
             </ContentBox>
           </TabPanel>
         </TabPanels>
