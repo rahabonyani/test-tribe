@@ -1,42 +1,29 @@
-import {
-  Avatar,
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Button,
-  HStack,
-  Image,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Avatar, Box, Heading, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { useMemo } from 'react';
 import { BiPlus, BiSave, BiVideo } from 'react-icons/bi';
-import { BsChevronRight, BsThreeDots } from 'react-icons/bs';
+import { BsThreeDots } from 'react-icons/bs';
+import type { EventCardProps } from './types';
+import parse from 'html-react-parser';
+import UserAvatar from '../../atoms/UserAvatar';
+import CardButton from '../../atoms/CardButton';
 
-const EventCard = () => {
+const EventCard = (props: EventCardProps) => {
+  const { name, title, tagline, shortContent, profilePicture } = props;
+
+  const text = useMemo(() => shortContent && parse(shortContent), [shortContent]);
+
   return (
-    <VStack w="full" bg="white" rounded={10}>
+    <VStack w="full" bg="white" rounded={10} mb="5">
       <HStack p={4} w="full" justifyContent="space-between">
         <HStack>
           <Box w={16} h={16} boxShadow="lg" rounded="full">
-            <Image rounded="full" w="full" h="full" objectFit="cover" src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+            <UserAvatar status="success" profilePicture={profilePicture} />
           </Box>
           <VStack alignItems="start" spacing={1} ps={2}>
-            <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
-              <BreadcrumbItem fontWeight={500}>
-                <BreadcrumbLink href="#">Mehrdad</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="#">Mountains</BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
-            <Text>a day ago . Front-end Developer</Text>
+            <Text fontSize="xl" fontWeight="medium">
+              {name}
+            </Text>
+            <Text>{tagline}</Text>
           </VStack>
         </HStack>
         <Box>
@@ -54,57 +41,22 @@ const EventCard = () => {
           </Menu>
         </Box>
       </HStack>
-      <Box w="full">
-        <Image
-          w="full"
-          h="full"
-          src="https://i.picsum.photos/id/1015/6000/4000.jpg?hmac=aHjb0fRa1t14DTIEBcoC12c5rAXOSwnVlaA5ujxPQ0I"
-          alt=""
-          objectFit="cover"
-        />
+      <Heading w="full" as="h6" fontSize="2xl" ps={4} textAlign="start">
+        {title}
+      </Heading>
+
+      <Box textAlign="start" p={4} w="full">
+        {text}
       </Box>
-      <Text textAlign="start" p={4} w="full">
-        when your on the summit you can see everything around you
-      </Text>
       <SimpleGrid columns={3} spacing={10} w="full" px={4} pb={5}>
         <Box>
-          <Button
-            borderColor="gray.600"
-            color="gray.600"
-            leftIcon={<BiPlus fontSize="lg" />}
-            colorScheme="blue"
-            variant="outline"
-            w="full"
-            _hover={{ bg: 'gray.100' }}
-          >
-            Add in Calender
-          </Button>
+          <CardButton icon={<BiPlus fontSize="lg" />}>Add in Calender</CardButton>
         </Box>
         <Box>
-          <Button
-            borderColor="gray.600"
-            color="gray.600"
-            leftIcon={<BiVideo fontSize="lg" />}
-            colorScheme="blue"
-            variant="outline"
-            w="full"
-            _hover={{ bg: 'gray.100' }}
-          >
-            Zoom
-          </Button>
+          <CardButton icon={<BiVideo fontSize="lg" />}>Zoom</CardButton>
         </Box>
         <Box>
-          <Button
-            borderColor="gray.600"
-            color="gray.600"
-            leftIcon={<BiSave fontSize="lg" />}
-            colorScheme="blue"
-            variant="outline"
-            w="full"
-            _hover={{ bg: 'gray.100' }}
-          >
-            Save
-          </Button>
+          <CardButton icon={<BiSave fontSize="lg" />}>Save</CardButton>
         </Box>
       </SimpleGrid>
     </VStack>

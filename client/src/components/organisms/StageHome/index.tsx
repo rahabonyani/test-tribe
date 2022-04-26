@@ -1,17 +1,14 @@
-import { Box, Image, Skeleton, VStack } from '@chakra-ui/react';
-import { Image as ImageType } from '@tribeplatform/gql-client/types';
+import { Box, VStack } from '@chakra-ui/react';
+import Banner from '../../atoms/Banner';
 import UserInfo from '../../molecules/UserInfo';
-import { stageHomeProps } from './types';
+import type { StageHomeProps } from './types';
 
-const StageHome = ({ banner, name, role, status, profilePicture }: stageHomeProps) => {
+const StageHome = (props: StageHomeProps) => {
+  const { banner, name, role, status, profilePicture } = props;
   return (
     <VStack roundedTop={10} bg="white">
       <Box w="100%" h="40" roundedTop={10}>
-        {status === 'loading' ? (
-          <Skeleton h="full" w="full" />
-        ) : (
-          <Image src={(banner as ImageType)?.url} alt="" w="100%" h="100%" objectFit="cover" roundedTop={10} />
-        )}
+        <Banner banner={banner} status={status} />
       </Box>
       <UserInfo name={name} role={role} profilePicture={profilePicture} status={status} />
     </VStack>

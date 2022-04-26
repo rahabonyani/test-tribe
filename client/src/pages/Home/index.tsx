@@ -2,7 +2,7 @@ import StageHome from '../../components/organisms/StageHome';
 import TabsContents from '../../components/organisms/TabsContents';
 import Layout from '../../components/templates/layout';
 import { simplifyPaginatedResult } from '@tribeplatform/react-sdk/utils';
-import { Post } from '@tribeplatform/gql-client/types';
+import type { Post } from '@tribeplatform/gql-client/types';
 import { useAuthMember, usePosts } from '@tribeplatform/react-sdk/hooks';
 
 const Home = () => {
@@ -19,12 +19,11 @@ const Home = () => {
       owner: { member: 'all' },
       reactions: { variables: { limit: 5 }, fields: 'basic' },
     },
-    variables: { limit: 3 },
+    variables: { limit: 4 },
   });
 
-  // Convert pages of notes into a flat list of nodes
   const { nodes: latestPosts } = simplifyPaginatedResult<Post>(posts);
-  console.log(hasNextPage);
+
   return (
     <Layout>
       <StageHome banner={user?.banner} name={user?.name} profilePicture={user?.profilePicture} role={user?.role?.name} status={status} />
@@ -33,6 +32,7 @@ const Home = () => {
         latestPosts={latestPosts}
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         tagline={user?.tagline}
         email={user?.email}

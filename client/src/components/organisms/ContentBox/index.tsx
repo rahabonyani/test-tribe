@@ -3,7 +3,7 @@ import { contentBoxProps } from './types';
 
 const ContentBox = ({ sideBar, children }: contentBoxProps) => {
   return (
-    <Grid h="200px" templateColumns="repeat(9, 1fr)" gap={4}>
+    <Grid templateColumns="repeat(9, 1fr)" gap={4}>
       <GridItem colSpan={sideBar ? 6 : 9} pb="4">
         {children}
       </GridItem>

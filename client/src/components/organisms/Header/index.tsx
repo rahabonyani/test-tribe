@@ -1,7 +1,7 @@
-import { Avatar, Container, Grid, GridItem, } from '@chakra-ui/react';
+import { Avatar, Container, Grid, GridItem } from '@chakra-ui/react';
 import SearchInput from '../../atoms/SearchInput';
 import Tools from '../../molecules/Tools';
-import { headerProps } from './types';
+import type { headerProps } from './types';
 
 const Header = ({ logo }: headerProps) => {
   return (
