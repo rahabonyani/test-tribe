@@ -46,7 +46,17 @@
 
 ## About The Project
 
-This is a template project for creating apps in Tribe.
+Hello,
+I finally finished the test
+
+I used react and typescript and atomic design for the design system and I used the ui chakra,
+
+Chakra is a library of carefully created React components that comes with all the styling benefits of Tailwind and takes care of all the details.
+
+I created a app where people can add events.
+This events can be associated with Google Calendar, zoom or google meet,
+So when members see the event, they can set the event in their Google Calendar,also  they can see the zoom or google meet event link.
+In addition, they can save the event they want to join   
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
