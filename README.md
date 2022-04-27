@@ -49,7 +49,7 @@
 Hello,
 I finally finished the test
 
-I used react and typescript and atomic design for the design system and I used the ui chakra,
+I used react and typescript and atomic design for the design system and I used the chakra ui,
 
 Chakra is a library of carefully created React components that comes with all the styling benefits of Tailwind and takes care of all the details.
 
